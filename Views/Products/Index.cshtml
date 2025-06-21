@@ -1,0 +1,31 @@
+﻿@model IEnumerable<SuperMarket.Models.ProductModel>
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+<h1 class="text-2xl font-bold mb-4">Products</h1>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    @foreach (var product in Model)
+    {
+        <div class="p-4 border rounded-xl shadow-md">
+            <h2 class="text-lg font-semibold">@product.Name</h2>
+            <p class="text-gray-600">Price: $@product.Price</p>
+            <button class="toggle-btn mt-2 px-4 py-2 bg-red-600 text-white rounded transition-all duration-300">
+                Buy
+            </button>
+        </div>
+    }
+</div>
+
+<script>
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const isBuy = this.textContent.trim() === 'Buy';
+            this.textContent = isBuy ? 'Cancel' : 'Buy';
+            this.classList.toggle('bg-red-600');
+            this.classList.toggle('bg-blue-600');
+        });
+    });
+</script>

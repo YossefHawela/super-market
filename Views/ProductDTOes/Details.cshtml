@@ -1,0 +1,36 @@
+﻿@model SuperMarket.DTO.ProductDTO
+
+@{
+    ViewData["Title"] = "Product Details";
+}
+
+<div class="container py-5">
+    <div class="mb-4">
+        <h2 class="fw-bold text-primary">Product Details</h2>
+        <p class="text-muted">Review the product information below</p>
+    </div>
+
+    <div class="card shadow-sm rounded-4 p-4">
+        <dl class="row">
+            <dt class="col-sm-3 fw-semibold text-secondary">
+                @Html.DisplayNameFor(m => m.Name)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(m => m.Name)
+            </dd>
+
+            <dt class="col-sm-3 fw-semibold text-secondary">
+                @Html.DisplayNameFor(m => m.Price)
+            </dt>
+            <dd class="col-sm-9">
+                $@Html.DisplayFor(m => m.Price)
+            </dd>
+        </dl>
+
+
+        <div class="mt-4 d-flex justify-content-between">
+            <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
+            <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Edit</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Confirm Logout";
+}
+
+<div class="card shadow-sm p-4 mx-auto mt-5" style="max-width: 500px;">
+    <h2 class="text-center mb-3">Confirm Logout</h2>
+    <p class="text-center mb-4">Are you sure you want to log out?</p>
+
+    <form asp-action="Logout" method="post" class="d-flex justify-content-center gap-3">
+        <button type="submit" class="btn btn-danger">Yes, log out</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">No, go back</a>
+    </form>
+
+    <p class="text-muted text-center mt-4 small">
+        If you didn’t mean to log out, you can continue using the application.
+    </p>
+</div>

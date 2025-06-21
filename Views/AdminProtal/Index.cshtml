@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Admin Portal";
+}
+
+<div class="container py-5">
+    <div class="text-center mb-4">
+        <h1 class="display-5">Admin Dashboard</h1>
+        <p class="text-muted">Manage users, products, and settings</p>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="card-title">User Management</h5>
+                    <p class="card-text text-muted">View, edit, or delete users.</p>
+                    <a href="/AdminProtal/Users" class="btn btn-outline-primary w-100">Go to Users</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="card-title">Product Control</h5>
+                    <p class="card-text text-muted">Add, update, or remove products.</p>
+                    <a href="/ProductDTOes" class="btn btn-outline-success w-100">Manage Products</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="card-title">Site Settings</h5>
+                    <p class="card-text text-muted">Tweak global configuration.</p>
+                    <a href="/AdminProtal/Settings" class="btn btn-outline-warning w-100">Adjust Settings</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

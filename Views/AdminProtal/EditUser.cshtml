@@ -1,0 +1,47 @@
+﻿@model SuperMarket.DTO.UserDTO
+@{
+    ViewData["Title"] = "Edit User";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="mb-4 fw-bold text-center">Edit User</h2>
+
+            <form asp-action="EditUserPost" method="post">
+                <input type="hidden" asp-for="Id" value="@Model.Id" />
+
+                <div class="form-floating mb-3">
+                    <input asp-for="UserName" class="form-control" placeholder="Username" value="@Model.UserName" />
+                    <label asp-for="UserName">Username</label>
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Email" class="form-control" placeholder="Email" value="@Model.Email" />
+                    <label asp-for="Email">Email</label>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-4">
+                    <select asp-for="Role" class="form-select" value="@Model.Role">
+                        <option value="User">User</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+                    <label asp-for="Role">Role</label>
+                    <span asp-validation-for="Role" class="text-danger"></span>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-warning btn-lg rounded-pill shadow-sm">
+                        <i class="bi bi-pencil-square me-2"></i>Update User
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - super_market</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/super_market.styles.css" asp-append-version="true" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+</head>
+<body class="bg-gray-100 text-gray-800 min-h-screen flex flex-col">
+    <header>
+        <nav class="bg-white shadow-md">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-16 items-center">
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="text-xl font-bold text-blue-600 hover:text-blue-800">super_market</a>
+                    <div class="hidden md:flex space-x-6">
+                        <a class="text-gray-700 hover:text-blue-600" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        <a class="text-gray-700 hover:text-blue-600" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        @if (User.Identity?.IsAuthenticated == true)
+                        {
+                            <a class="text-gray-700 hover:text-blue-600" asp-area="" asp-controller="Products" asp-action="Index">Products</a>
+                            <a class="text-yellow-700 hover:text-blue-600" asp-area="" asp-controller="AdminProtal" asp-action="Index">Admin Portal</a>
+                            <a class="text-red-700 hover:text-blue-600" asp-area="" asp-controller="Account" asp-action="LogoutView">Logout</a>
+                        }
+                        else
+                        {
+                            <a class="text-yellow-700 hover:text-blue-600" asp-area="" asp-controller="AdminProtal" asp-action="Index">Admin Portal</a>
+                            <a class="text-blue-700 hover:text-red-600" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                            <a class="text-blue-700 hover:text-red-600" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main role="main" class="flex-grow container mx-auto px-4 py-6">
+        @RenderBody()
+    </main>
+
+    <footer class="bg-white border-t py-4 text-center text-sm text-gray-500">
+        &copy; 2025 - super_market -
+        <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-blue-600 hover:underline">Privacy</a>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

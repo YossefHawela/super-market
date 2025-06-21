@@ -1,0 +1,65 @@
+﻿@using SuperMarket.DTO
+@model IEnumerable<UserDTO>
+
+@{
+    ViewData["Title"] = "Manage Users";
+}
+
+<div class="container py-4">
+    <div class="text-muted text-end mb-4">
+        <h5 class="fw-light">Viewing as <span class="fw-bold text-primary">@User.Identity!.Name</span></h5>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">Users</h2>
+        <a asp-action="CreateUser" class="btn btn-success px-4 py-2 rounded-pill shadow-sm">
+            <i class="bi bi-person-plus me-2"></i>Add new Account
+        </a>
+    </div>
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <i class="bi bi-shield-exclamation me-2"></i>@TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle me-2"></i>@TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <table class="table table-hover shadow-sm">
+        <thead class="table-light">
+            <tr>
+                <th>UserName</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Created At</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.UserName</td>
+                    <td>@user.Email</td>
+                    <td>
+                        <span class="badge bg-@(user.Role == "Admin" ? "danger" : "secondary")">@user.Role</span>
+                    </td>
+                    <td>@user.CreatedAt.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <a asp-action="EditUser" asp-route-UserName="@user.UserName" asp-route-Id="@user.Id" asp-route-Email="@user.Email" asp-route-Role="@user.Role" class="btn btn-sm btn-primary">Edit</a>
+                            <a asp-action="DeleteUser" asp-route-UserName="@user.UserName" asp-controller="AdminProtal" asp-route-UserName="@user.UserName" asp-route-Id="@user.Id" asp-route-Email="@user.Email" asp-route-Role="@user.Role" class="btn btn-sm btn-danger">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
