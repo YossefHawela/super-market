@@ -294,9 +294,9 @@ namespace SuperMarket.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult AdminLogs(int page= 1)
         {
-            const int pageSize = 100;
+            const int pageSize = 20;
             var logs = _dataConnector.AdminLogs
-                .OrderByDescending(l => l.ID)
+                .OrderByDescending(l => l.dateCreated)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();
