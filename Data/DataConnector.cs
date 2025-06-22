@@ -14,6 +14,8 @@ namespace SuperMarket.Data
         public IEnumerable<UserDTO> Users => _context.userAccounts.ToList();
         public IEnumerable<ProductDTO> Products => _context.ProductDTO.ToList();
 
+        public IEnumerable<LogDTO> AdminLogs => _context.AdminLogs.ToList();
+
         public DataConnector(ApplicationDbContext context)
         {
             _context = context;

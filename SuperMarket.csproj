@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>aspnet-SuperMarket-d450678f-4703-47c8-8e93-e50c9507e530</UserSecretsId>
+    <UserSecretsId>you</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

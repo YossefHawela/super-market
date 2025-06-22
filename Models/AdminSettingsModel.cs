@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
+using System.ComponentModel.DataAnnotations;
 
 namespace SuperMarket.Models
 {
@@ -11,5 +12,11 @@ namespace SuperMarket.Models
         public string ContactEmail { get; set; } = string.Empty;
 
         public bool MaintenanceMode { get; set; }
+
+
+        public override string ToString()
+        {
+            return $"{nameof(SiteName)}:{SiteName}, {nameof(ContactEmail)}:{ContactEmail}, {nameof(MaintenanceMode)}:{MaintenanceMode}";
+        }
     }
 }

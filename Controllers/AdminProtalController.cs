@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SuperMarket.Data;
 using SuperMarket.DTO;
+using SuperMarket.Filters;
 using SuperMarket.Mapper;
 using SuperMarket.Models;
 using System.Collections;
@@ -129,6 +130,8 @@ namespace SuperMarket.Controllers
             return View(vm);
         }
         [HttpPost]
+        [ServiceFilter<LogActionFilter>]
+
         public IActionResult SaveSettings(AdminSettingsModel model)
         {
             if (!ModelState.IsValid)
@@ -148,6 +151,7 @@ namespace SuperMarket.Controllers
         [HttpPost]
         [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
+        [ServiceFilter<LogActionFilter>]
         public IActionResult CreateUser(UserDTO model)
         {
             if (!ModelState.IsValid) return View(model);
@@ -180,6 +184,8 @@ namespace SuperMarket.Controllers
         }
         [HttpGet]
         [Authorize(Roles = "Admin")]
+        [ServiceFilter<LogActionFilter>]
+
         public IActionResult EditUser(UserDTO model)
         {
             var user = _dataConnector.GetUserByUserName(model.UserName);
@@ -198,6 +204,7 @@ namespace SuperMarket.Controllers
         [HttpPost("EditUserPost")]
         [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
+        [ServiceFilter<LogActionFilter>]
         public IActionResult EditUserPost(UserDTO model)
         {
             var user = _dataConnector.GetUserByID(model.Id);
@@ -265,6 +272,7 @@ namespace SuperMarket.Controllers
         [HttpPost]
         [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
+        [ServiceFilter<LogActionFilter>]
         public IActionResult DeleteUser(UserDTO model)
         {
             var user = _dataConnector.Users.FirstOrDefault(u => u.Id == model.Id);
@@ -283,6 +291,23 @@ namespace SuperMarket.Controllers
         }
 
 
+        [Authorize(Roles = "Admin")]
+        public IActionResult AdminLogs(int page= 1)
+        {
+            const int pageSize = 100;
+            var logs = _dataConnector.AdminLogs
+                .OrderByDescending(l => l.ID)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
 
+            int totalLogs = _dataConnector.AdminLogs.Count();
+            int totalPages = (int)Math.Ceiling((double)totalLogs / pageSize);
+
+            ViewBag.Page = page;
+            ViewBag.TotalPages = totalPages;
+
+            return View(logs);
+        }
     }
 }

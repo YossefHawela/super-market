@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
+using System.Text.RegularExpressions;
 
 namespace SuperMarket.Models
 {
@@ -20,6 +21,12 @@ namespace SuperMarket.Models
 
                 return !string.IsNullOrEmpty(UserNameOrEmail) && !string.IsNullOrEmpty(Password) && emailRegex.IsMatch(UserNameOrEmail) || userNameRegex.IsMatch(UserNameOrEmail);
             }
+        }
+
+
+        public override string ToString()
+        {
+            return $"{nameof(UserNameOrEmail)}:{UserNameOrEmail}, {nameof(Role)}:{Role}";
         }
 
     }

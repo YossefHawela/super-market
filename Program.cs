@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SuperMarket.Data;
+using SuperMarket.Filters;
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -17,6 +18,8 @@ builder.Services.AddAuthentication("ToDoAuthenCookie")
         options.ReturnUrlParameter = "returnUrl"; // Set the return URL parameter name
     });
 
+
+builder.Services.AddScoped<LogActionFilter>();
 
 builder.Services.AddAuthorization();
 

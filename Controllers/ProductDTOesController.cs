@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SuperMarket.Data;
 using SuperMarket.DTO;
+using SuperMarket.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,6 @@ namespace SuperMarket.Controllers
 {
 
     [Authorize(Roles = "Admin")]
-
     public class ProductDTOesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -49,6 +49,7 @@ namespace SuperMarket.Controllers
         }
 
         // GET: ProductDTOes/Create
+
         public IActionResult Create()
         {
             return View();
@@ -59,6 +60,7 @@ namespace SuperMarket.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ServiceFilter<LogActionFilter>]
         public async Task<IActionResult> Create([Bind("Id,Name,Price")] ProductDTO productDTO)
         {
             if (ModelState.IsValid)
@@ -92,6 +94,7 @@ namespace SuperMarket.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ServiceFilter<LogActionFilter>]
         public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,Price")] ProductDTO productDTO)
         {
             if (id != productDTO.Id)
@@ -143,6 +146,7 @@ namespace SuperMarket.Controllers
         // POST: ProductDTOes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [ServiceFilter<LogActionFilter>]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             var productDTO = await _context.ProductDTO.FindAsync(id);

@@ -17,13 +17,20 @@ namespace SuperMarket.Models
                 Regex emailRegex = new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$"); // Basic email validation regex
                 Regex passwordRegex = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"); // At least 8 characters, one uppercase, one lowercase, one number, and one special character
                 Regex userNameRegex = new Regex(@"^[a-zA-Z0-9_]{3,}$"); // At least 3 characters, alphanumeric and underscores
-         
+
                 return !string.IsNullOrEmpty(Email) && !string.IsNullOrEmpty(UserName) && !string.IsNullOrEmpty(Password) && emailRegex.IsMatch(Email) && passwordRegex.IsMatch(Password) &&
                        Password == ConfirmPassword && userNameRegex.IsMatch(UserName);
             }
         }
 
-        public static readonly RegisterAccountModel Default = new RegisterAccountModel {};
+        public static readonly RegisterAccountModel Default = new RegisterAccountModel { };
+
+    
+
+        public override string ToString()
+        {
+            return $"{nameof(UserName)}:{UserName}, {nameof(Email)}:{Email}, {nameof(Role)}:{Role}";
+        }
 
     }
 }

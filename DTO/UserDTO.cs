@@ -21,4 +21,10 @@ public class UserDTO
 
 
     public string Role { get; set; } = "User"; // Default role
+
+
+    public override string ToString()
+    {
+        return $"{nameof(Id)}:{Id}, {nameof(UserName)}:{UserName}, {nameof(Email)}:{Email}, {nameof(Role)}:{Role}";
+    }
 }

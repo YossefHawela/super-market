@@ -12,5 +12,7 @@ namespace SuperMarket.Data
         }
         public DbSet<SuperMarket.DTO.ProductDTO> ProductDTO { get; set; } = default!;
         public DbSet<SuperMarket.DTO.UserDTO> userAccounts { get; set; } = default!;
+
+        public DbSet<LogDTO> AdminLogs { get; set; }
     }
 }
