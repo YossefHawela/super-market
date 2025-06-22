@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SuperMarket.Data;
 using SuperMarket.Filters;
+using SuperMarket.Middleware;
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -30,6 +31,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<PreventSqlInjectionMiddleware>();
+builder.Services.AddScoped<PreventXssMiddleware>();
 
 builder.Services.AddRazorPages();
 
@@ -61,7 +65,15 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+
+app.UseAuthentication();
+
+app.UseMiddleware<PreventSqlInjectionMiddleware>();
+app.UseMiddleware<PreventXssMiddleware>();
+
+
 app.UseAuthorization();
+
 
 app.MapControllerRoute(
     name: "default",
